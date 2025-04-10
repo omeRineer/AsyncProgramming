@@ -1,9 +1,14 @@
-﻿/*
+﻿#region Description
+
+/*
  * Locking mekanizması sayesinde threadler arasındaki Race Conditions problemlerin önüne geçilebilir.
  * Sistem çalışma anında ilk hangi thread çalıştıysa bir referans tipli değişkeni lock eder. Bu sayede diğer lock kullanılan threadler bu kilidin açılmasını bekler.
  * Çalışan thread lock bloğu içerisinden çıktığında kilit açılmış olur. Ve lockdan dolayı bloklanmış thread çalışmasına devam eder.
  */
 
+#endregion
+
+#region Example 1
 object _locking = new();
 int i = 1;
 
@@ -33,3 +38,5 @@ Thread thread2 = new(() =>
 
 thread1.Start();
 thread2.Start();
+#endregion
+

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleThread", "SimpleThread\SimpleThread.csproj", "{74554CF5-8F13-4141-A4EE-65711CDBB2BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "#1 SimpleThread", "SimpleThread\#1 SimpleThread.csproj", "{74554CF5-8F13-4141-A4EE-65711CDBB2BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundThread", "BackgroundThread\BackgroundThread.csproj", "{37807B2E-5E7A-4E45-9DB4-02D8FFDAD28F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "#2 BackgroundThread", "BackgroundThread\#2 BackgroundThread.csproj", "{37807B2E-5E7A-4E45-9DB4-02D8FFDAD28F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadState", "ThreadState\ThreadState.csproj", "{DF9C95CE-D742-4009-9B1C-A44F6B2651C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "#5 ThreadState", "ThreadState\#5 ThreadState.csproj", "{DF9C95CE-D742-4009-9B1C-A44F6B2651C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locking", "Locking\Locking.csproj", "{951C2AC9-AE61-468F-B540-87B116AC1041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "#3 Locking", "Locking\#3 Locking.csproj", "{951C2AC9-AE61-468F-B540-87B116AC1041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadJoin", "ThreadJoin\ThreadJoin.csproj", "{BBB096AC-C4E1-4DA8-B07F-B09DD2B9BB2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "#4 ThreadJoin", "ThreadJoin\#4 ThreadJoin.csproj", "{BBB096AC-C4E1-4DA8-B07F-B09DD2B9BB2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "#6 Thread Synchronization", "#6 Thread Synchronization\#6 Thread Synchronization.csproj", "{6E29AD4D-BDF8-4032-B60E-AA2F49504A29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{BBB096AC-C4E1-4DA8-B07F-B09DD2B9BB2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB096AC-C4E1-4DA8-B07F-B09DD2B9BB2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB096AC-C4E1-4DA8-B07F-B09DD2B9BB2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E29AD4D-BDF8-4032-B60E-AA2F49504A29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E29AD4D-BDF8-4032-B60E-AA2F49504A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E29AD4D-BDF8-4032-B60E-AA2F49504A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E29AD4D-BDF8-4032-B60E-AA2F49504A29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

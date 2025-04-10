@@ -1,23 +1,63 @@
-﻿int i = 1;
+﻿#region Description
 
-Thread thread1 = new(() =>
+/*
+ * Join metodu, threadin sonlanmasını beklemeyi sağlar. Debug ile Join metodu incelenirse ilgili threadin işlemini bitirdikten sonra bir alt satıra ilerlendiği görülebilir.
+ * 
+ */
+
+#endregion
+
+
+#region Example 1
+//int i = 1;
+
+//Thread thread1 = new(() =>
+//{
+//    while (i < 10)
+//    {
+//        i++;
+//        Console.WriteLine($"Thread 1 : {i}");
+//    }
+//});
+
+//Thread thread2 = new(() =>
+//{
+//    while (i > 0)
+//    {
+//        i--;
+//        Console.WriteLine($"Thread 2 : {i}");
+//    }
+//});
+
+//thread1.Start();
+//thread1.Join();
+//thread2.Start();
+#endregion
+
+#region Example 2
+List<Thread> workerThreads = new List<Thread>();
+List<int> results = new List<int>();
+
+for (int i = 0; i < 5; i++)
 {
-    while (i < 10)
+    Thread thread = new Thread(() =>
     {
-        i++;
-        Console.WriteLine($"Thread 1 : {i}");
-    }
-});
+        Thread.Sleep(new Random().Next(1000, 5000));
+        lock (results)
+        {
+            results.Add(new Random().Next(1, 10));
+        }
+    });
+    workerThreads.Add(thread);
+    thread.Start();
+}
 
-Thread thread2 = new(() =>
+foreach (Thread thread in workerThreads)
 {
-    while (i > 0)
-    {
-        i--;
-        Console.WriteLine($"Thread 2 : {i}");
-    }
-});
+    thread.Join();
+}
 
-thread1.Start();
-thread1.Join();
-thread2.Start();
+Console.WriteLine("Sum of results: " + results.Sum());
+#endregion
+
+
