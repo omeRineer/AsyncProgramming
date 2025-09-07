@@ -3,9 +3,7 @@
 #endregion
 
 
-// Spinner Synchronization
-
-#region Example 1
+#region Spinner Synchronization
 //bool condition1 = true;
 //bool condition2 = false;
 //int i = 0;
@@ -155,7 +153,55 @@
 
 #endregion
 
-#region Mutex
+#region Mutex (Uygulama seviyesinde kullanım)
+///*
+// * Mutex yapısıda diğer locking yapıları gibi aynı amaca hizmet eder. 
+// */
+
+//Mutex _mutex = new();
+//int i = 0;
+
+//Thread thread1 = new(() =>
+//{
+//    _mutex.WaitOne();
+
+//    try
+//    {
+//        while (i < 10)
+//        {
+//            i++;
+//            Console.WriteLine($"Thread 1 : {i}");
+//        }
+//    }
+//    finally
+//    {
+//        _mutex.ReleaseMutex();
+//    }
+//});
+
+//Thread thread2 = new(() =>
+//{
+//    _mutex.WaitOne();
+
+//    try
+//    {
+//        while (i > 0)
+//        {
+//            i--;
+//            Console.WriteLine($"Thread 2 : {i}");
+//        }
+//    }
+//    finally
+//    {
+//        _mutex.ReleaseMutex();
+//    }
+//});
+
+//thread1.Start();
+//thread2.Start();
+#endregion
+
+#region Mutex (Process seviyesinde kullanım)
 /*
  * Mutex yapısıda diğer locking yapıları gibi aynı amaca hizmet eder. Fakat bu yapılardan farklı olarak diğerleri Thread seviyesinde
  * locking işlemi yaparken Mutex process seviyesinde locking işlemi gerçekleştirir. Buna örnek verecek olursak
@@ -164,45 +210,34 @@
  * process seviyesinde locking yapmamız gerekir.
  */
 
-Mutex _mutex = new();
-int i = 0;
+Mutex _mutex;
+string mutexName = "App Instance";
+var isAvaibleMutex = Mutex.TryOpenExisting(mutexName, out _mutex);
 
-Thread thread1 = new(() =>
+if (isAvaibleMutex)
 {
-    _mutex.WaitOne();
-
-    try
-    {
-        while (i < 10)
-        {
-            i++;
-            Console.WriteLine($"Thread 1 : {i}");
-        }
-    }
-    finally
-    {
-        _mutex.ReleaseMutex();
-    }
-});
-
-Thread thread2 = new(() =>
+    _mutex.Close();
+    Console.WriteLine("Aynı isimde bir mutex mevcut. Bu mutex kapatılabilir.");
+}
+else
 {
-    _mutex.WaitOne();
+    _mutex = new Mutex(true, mutexName);
+    Console.WriteLine($"{mutexName} isminde Mutex çalışıyor");
+}
+Console.Read();
 
-    try
-    {
-        while (i > 0)
-        {
-            i--;
-            Console.WriteLine($"Thread 2 : {i}");
-        }
-    }
-    finally
-    {
-        _mutex.ReleaseMutex();
-    }
-});
+/*
+   ? : Eğer zaten çalışan başka bir örnek varsa ve ben TryOpenExisting ile o mutex’i açtıysam, sonra Close() çağırmam, o çalışan uygulamanın mutex’ini kapatmaz mı?”
 
-thread1.Start();
-thread2.Start();
+       Cevap: Hayır, kapatmaz.
+
+
+       TryOpenExisting mevcut (başka bir process tarafından oluşturulmuş) mutex’e sadece bir referans almanı sağlar.
+        
+       Yani:
+
+       O mutex hâlâ başka bir process (örneğin: çalışan başka bir uygulama örneği) tarafından tutuluyordur.
+       Senin Close() yapman, sadece senin aldığın referansı serbest bırakır.
+       Diğer uygulama hala mutex’e sahip olmaya devam eder.
+ */
 #endregion
